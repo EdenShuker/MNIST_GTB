@@ -37,7 +37,7 @@ def main3():
     print 'loaded data'
 
     # train a model
-    model = xgb.XGBClassifier(n_estimators=1)
+    model = xgb.XGBClassifier(n_estimators=10)
     model.fit(train, train_labels)
     print model  # just for checking on it
 
@@ -53,18 +53,19 @@ def main3():
 
 
 def main4():
-    def data_as_dmat(data_and_labels):
+    def data_as_np(data_and_labels):
         data, labels = data_and_labels
         data, labels = np.array(data), np.array(labels)
         return xgb.DMatrix(data, labels)
 
     mndata = mnist.MNIST('data')
-    train_dmat = data_as_dmat(mndata.load_training())
+    train_dmat = data_as_np(mndata.load_training())
 
     params = {'eta': 0.1, 'seed': 0, 'max_depth': 3, 'num_class': 10}
-    res = xgb.cv(params, train_dmat, num_boost_round=1, nfold=3, metrics=['merror'])
+    res = xgb.cv(params, train_dmat, num_boost_round=10, nfold=3, metrics=['merror'])
     # print res
-    print 'accuracy:', 1 - res['test-merror-mean'][0]
+    print res
+    print 'accuracy:', 1 - res['test-merror-mean'][-1]
 
 
 if __name__ == '__main__':
@@ -73,7 +74,7 @@ if __name__ == '__main__':
 
     # main1()
     # main2()
-    # main3()
-    main4()
+    main3()
+    # main4()
 
-    print 'time for running all:', time() - t
+print 'time for running all:', time() - t
