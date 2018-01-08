@@ -28,7 +28,6 @@ def model_fit(model, data_and_labels, test_d_l, use_train_cv=True, cv_folds=3, e
                           seed=0,
                           callbacks=[xgb.callback.print_evaluation(show_stdv=False),
                                      xgb.callback.early_stop(3)])
-
         print cvresult
         # TODO the code from source produced error, says that cvresult is dict and has no shape-param
         model.set_params(n_estimators=len(cvresult['test-mlogloss-mean']))
