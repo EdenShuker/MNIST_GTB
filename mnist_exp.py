@@ -5,6 +5,7 @@ import xgboost as xgb
 import mnist
 from sklearn.metrics import accuracy_score
 import pickle
+from sklearn.metrics import confusion_matrix
 
 
 def data_as_np(data_and_labels):
@@ -79,6 +80,10 @@ class MnistModel(object):
         # find accuracy
         acc = accuracy_score(labels, predictions)
         print 'accuracy %0.2f%%' % (acc * 100.0)
+
+        # confusion matrix
+        print confusion_matrix(labels, predictions)
+
 
     @staticmethod
     def load(filename=None):
