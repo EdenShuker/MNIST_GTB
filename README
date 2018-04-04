@@ -1,0 +1,19 @@
+Requirements:
+* python 2.7
+* python-mnist
+* numpy
+* xgboost
+* sklearn
+
+content:
+* We used the mnist-data from http://yann.lecun.com/exdb/mnist/,
+  and parsed it with the python-mnist package.
+* We trained the model with n_estimators=30 and achieved 93% accuracy on the test-set.
+* You can train a model and then save it to a file,
+  and you can then load a model from current file.
+* When performing a check on the test-set, it:
+    - prints out the accuracy on it
+    - prints a confusion matrix
+    - prints some samples taken from the test set,
+      it prints to the console the image (using 'display' of python-mnist package),
+      and then prints the gold label of the image and the predicted label of the model
